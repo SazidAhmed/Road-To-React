@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+.input-field{
+    margin: 20px auto;
+    position: relative;
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid purple;
+    box-shadow: 0 1px 0 0 purple;
+}

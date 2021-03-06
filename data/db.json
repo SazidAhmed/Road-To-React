@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "name": "Sazid Ahmed",
+      "email": "sazidahmed.official@gmail.com",
+      "phone": "01680800810",
+      "id": 1
+    },
+    {
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "phone": "01911908431",
+      "id": 2
+    }
+  ]
+}

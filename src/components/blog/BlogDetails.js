@@ -3,13 +3,14 @@ import useFetch from "../composables/useFetch";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const { data: blog, isLoading, isError } = useFetch('http://localhost:8000/blogs/' + id);
+  const { data: blog, isLoading, isError, setRefetch } = useFetch('http://localhost:8000/blogs/' + id);
   const history = useHistory();
 
   const handleClick = () => {
     fetch('http://localhost:8000/blogs/' + blog.id, {
       method: 'DELETE'
     }).then(() => {
+      setRefetch(true);
       history.push('/');
     }) 
   }
@@ -22,7 +23,7 @@ const BlogDetails = () => {
           <h2>{ blog.title }</h2>
           <p>Written by { blog.author }</p>
           <div>{ blog.body }</div>
-          <button onClick={handleClick}>Delete</button>
+          <button onClick={() => handleClick}>Delete</button>
         </article>
       )}
     </div>

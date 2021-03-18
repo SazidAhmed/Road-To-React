@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-const useFetch = (url) =>{
+
+const useFetch = (url, ) =>{
     //State Hook
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(null);
+    const [refetch, setRefetch] = useState(false)
 
     //runs when render
     useEffect(()=>{
@@ -21,6 +23,7 @@ const useFetch = (url) =>{
             setData(data);
             setIsLoading(false);
             setIsError(null);
+            setRefetch(false);
         })
         .catch((err)=>{
             if(err.name === 'AbortError'){
@@ -29,12 +32,13 @@ const useFetch = (url) =>{
                 setIsLoading(false);
                 setIsError(err.message);
             }
+            setRefetch(false)
         })
 
         return ()=> abortFetch.abort();
-    }, [url]);
+    }, [url, refetch]);
 
-    return {data, isLoading, isError}
+    return {data, isLoading, isError, setData, setRefetch}
 }
 
 export default useFetch;

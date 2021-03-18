@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom';
 
-const ContactList = ({ contacts, title }) => {
+const ContactList = ({ contacts, title, handleDelete }) => {
 
     const contactDelete = (id)=>{
         fetch('http://localhost:8000/contacts/' + id, {
             method: 'DELETE'
         }).then(() => {
             console.log("deleted")
-            // this.$emit('delete', id)
+            //this calls handle function from parent Home component.
+            handleDelete(id);
         }) 
     }
+
+   
+
     return ( 
         <div className="container-fluid">
             <h4>{ title }</h4>

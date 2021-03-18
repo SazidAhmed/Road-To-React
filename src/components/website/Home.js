@@ -3,11 +3,18 @@ import ContactList from '../contacts/ContactList';
 
 const Home = () => {
     //State Hook
-    const {data: contacts, isLoading, isError} = useFetch('http://localhost:8000/contacts'
+    const {data: contacts, setData,  isLoading, isError , setRefetch} = useFetch('http://localhost:8000/contacts'
     )
     const handleDelete = (id)=>{
-        contacts.filter( contact => contact.id !== id )
+        // setRefetch(true) 
+        //uncomment above line if you want a refetch from server after delete , but leave if you 
+        //manually want to remove from done as below
+       const newContact = contacts.filter( contact => contact.id !== id );
+       setData(newContact);
+      
     }
+
+   
 
     return (  
         <div className="container">
@@ -15,7 +22,7 @@ const Home = () => {
                 <div className ="card-content">
                     { isError && <div>{ isError }</div> }
                     { isLoading && <div>Loading...</div> }
-                    { contacts && <ContactList contacts={ contacts } delete={handleDelete} title="Contact List"/>}
+                    { contacts && <ContactList contacts={ contacts } handleDelete={handleDelete} title="Contact List"/>}
                 </div>
             </div>
         </div>

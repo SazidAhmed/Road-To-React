@@ -1,24 +1,24 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from './components/Header';
+import Dashboard from './pages/admin/Dashboard'
+import Login from './pages/guest/Login'
+import Register from './pages/guest/Register'
+
 
 function App() {
   return (
     <>
-
-<label for="my-modal" class="btn modal-button">open modal</label>
-
-
-<input type="checkbox" id="my-modal" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Congratulations random Interner user!</h3>
-    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-    <div class="modal-action">
-      <label for="my-modal" class="btn">Yay!</label>
-    </div>
-  </div>
-</div>
+      <Router>
+        <div>
+          <Header />
+          <Routes>
+            <Route path='/' element={< Dashboard />} />
+            <Route path='/login' element={< Login />} />
+            <Route path='/register' element={< Register />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }

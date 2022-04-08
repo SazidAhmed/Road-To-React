@@ -6,13 +6,17 @@ import {createContact, reset} from '../features/contact/contactSlice'
 import Spinner from './Spinner'
 
 function ContactForm(){
-    const [formData, setFormData]= useState({
-        name:'',
-        email:'',
-        mobile:''
-      })
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [mobile, setMobile] = useState('')
+
+    // const [formData, setFormData]= useState({
+    //     name:'',
+    //     email:'',
+    //     mobile:''
+    //   })
     
-    const { name, email, mobile } = formData
+    // const { name, email, mobile } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -24,23 +28,22 @@ function ContactForm(){
             toast.error(message)
         }
 
-        if (isSuccess || contacts) {
-            navigate('/')
-        }
+      
 
         dispatch(reset())
     }, [contacts, isError, isSuccess, message, navigate, dispatch])
 
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value,
-        }))
-    } 
+    // const onChange = (e) => {
+    //     setFormData((prevState) => ({
+    //       ...prevState,
+    //       [e.target.name]: e.target.value,
+    //     }))
+    // } 
     
     const onSubmit = (e) => {
         e.preventDefault()
         console.log("submitted")
+        console.log(e.target.value)
         const contactData = {
             name,
             email,
@@ -48,7 +51,9 @@ function ContactForm(){
         }
     
         dispatch(createContact(contactData))
-        setFormData('')
+        setName('')
+        setEmail('')
+        setMobile('')
     }
 
     if(isLoading){
@@ -65,19 +70,19 @@ function ContactForm(){
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
-                    <input type="text" name='name' value={name} onChange={onChange} placeholder="name" className="input input-bordered" />
+                    <input type="text" name='name' value={name} onChange={(e) => setName(e.target.value)} placeholder="name" className="input input-bordered" />
                     </div>
                     <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input type="text" name='email' value={email} onChange={onChange} placeholder="email" className="input input-bordered" />
+                    <input type="text" name='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" className="input input-bordered" />
                     </div>
                     <div className="form-control">
                     <label className="label">
                         <span className="label-text">Mobile</span>
                     </label>
-                    <input type="text" name='mobile' value={mobile} onChange={onChange} placeholder="mobile" className="input input-bordered" />
+                    <input type="text" name='mobile' value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="mobile" className="input input-bordered" />
                     </div>
                     <div className="form-control mt-6">
                     <button type='submit' className="btn btn-primary">Save</button>

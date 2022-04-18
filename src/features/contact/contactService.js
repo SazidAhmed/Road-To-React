@@ -1,6 +1,16 @@
 import axios from 'axios'
 
-// Register user
+const contactList = async (token) => {
+    const config = {
+        headers:{
+            Authorization : `Bearer ${token}`,
+        }
+    }
+  const response = await axios.get('/api/contactList', config)
+
+  return response.data
+}
+
 const createContact = async (contactData, token) => {
     const config = {
         headers:{
@@ -13,6 +23,7 @@ const createContact = async (contactData, token) => {
 }
 
 const contactService = {
+    contactList,
     createContact
 }
 

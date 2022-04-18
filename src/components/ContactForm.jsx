@@ -28,8 +28,9 @@ function ContactForm(){
             toast.error(message)
         }
 
-      
-
+        if (isSuccess) {
+            navigate('/')
+        }
         dispatch(reset())
     }, [contacts, isError, isSuccess, message, navigate, dispatch])
 
